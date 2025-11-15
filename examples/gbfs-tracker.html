@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+  <head>
+    <title>Leaflet.DataTracker - GBFS Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="//unpkg.com/github-fork-ribbon-css@0.2.3/gh-fork-ribbon.css"></head>
+    <body>
+
+	<script src=" https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js "></script>
+	<script src="../src/L.DataTracker.js"></script>
+	<script>
+
+	 var map = new L.Map('map', {zoom: 12, center: new L.latLng([41.575730,13.002411]) });
+
+	 map.addLayer(new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'));
+	</script>
+
+	<a href="https://github.com/iomonad/leaflet-datatracker" class="github-fork-ribbon" data-ribbon="Fork me on GitHub">Github</a>
+
+    </body>
+</html>
