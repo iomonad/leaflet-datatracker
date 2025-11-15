@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="https://www.w3.org/1999/xhtml">
     <head>
-	<title>Leaflet.DataTracker - Lime GBFS Example</title>
+	<title>Leaflet.DataTracker - ADS-B Tracker</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 	<link href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 	    <div id="map"></div>
 	    <script>
 
-	     var map = new L.Map('map', {zoom: 16, center: new L.latLng([48.8339, 2.3261])});
+	     var map = new L.Map('map', {zoom: 10, center: new L.latLng([48.8339, 2.3261])});
 
 	     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
 		 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -32,10 +32,12 @@
 	     }).addTo(map);
 
 	     const trackLayer = L.dataTracker({
-		 url: 'https://corsproxy.io/?url=https://data.lime.bike/api/partners/v2/gbfs/paris/free_bike_status',
-		 itemExtractor: (response) => response.data.bikes,
-		 idExtractor: (item) => item.bike_id,
-		 metadataExtractor: (item) => ({ lon: item.lon, lat: item.lat })
+		 url: 'https://opensky-network.org/api/states/all',
+		 frequency: 15000,
+		 itemExtractor: (response) => response.states,
+		 itemFilter: (item) => item[2] === 'France',
+		 idExtractor: (item) => item[1],
+		 metadataExtractor: (item) => ({ lon: item[5], lat: item[6] })
 	     }).addTo(map);
 
 	    </script>
