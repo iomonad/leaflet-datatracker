@@ -2,8 +2,9 @@
 
 [![NPM version](https://img.shields.io/npm/v/leaflet-datatracker.svg)](https://www.npmjs.com/package/leaflet-datatracker)
 
-A Leaflet layer plugin for tracking point position changes as PolyLines.
-Visualize Geospatial timeseries such as GPS tracking, ADBS, GBFS API's or any API with dynamic object locations.
+> A Leaflet layer plugin for tracking point position changes as PolyLines.
+
+Visualize Geospatial timeseries such as GPS tracking, [ADSB](https://en.wikipedia.org/wiki/Automatic_Dependent_Surveillance%E2%80%93Broadcast), [GBFS](https://gbfs.org/) API's or any API with dynamic object locations.
 
 ## Installation
 
