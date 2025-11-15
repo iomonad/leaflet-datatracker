@@ -1,24 +1,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="https://www.w3.org/1999/xhtml">
-  <head>
-    <title>Leaflet.DataTracker - GBFS Example</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <head>
+	<title>Leaflet.DataTracker - GBFS Example</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+	<link href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" />
+	<style>
+	 body {
+	     padding: 0;
+	     margin: 0;
+	 }
+	 html, body, #map {
+	     height: 100%;
+	     width: 100vw;
+	 }
+	</style>
+	<body>
+	    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js "></script>
+	    <script src="../dist/leaflet-datatracker.min.js"></script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" />
-    <link rel="stylesheet" href="//unpkg.com/github-fork-ribbon-css@0.2.3/gh-fork-ribbon.css"></head>
-    <body>
+	    <div id="map"></div>
+	    <script>
 
-	<script src=" https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js "></script>
-	<script src="../src/L.DataTracker.js"></script>
-	<script>
+	     var map = new L.Map('map', {zoom: 16, center: new L.latLng([48.8339, 2.3261])});
 
-	 var map = new L.Map('map', {zoom: 12, center: new L.latLng([41.575730,13.002411]) });
+	     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+	     }).addTo(map);
+	    </script>
 
-	 map.addLayer(new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'));
-	</script>
-
-	<a href="https://github.com/iomonad/leaflet-datatracker" class="github-fork-ribbon" data-ribbon="Fork me on GitHub">Github</a>
-
-    </body>
+	    <a href="https://github.com/iomonad/leaflet-datatracker" class="github-fork-ribbon" data-ribbon="Fork me on GitHub">Github</a>
+	</body>
 </html>
