@@ -1,6 +1,6 @@
 {
     "name": "leaflet-datatracker",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "A Leaflet layer plugin for tracking point position changes as PolyLines",
     "main": "src/L.DataTracker",
     "repository": {
