@@ -5,32 +5,32 @@ L.DataTracker = L.GeoJSON.extend({
 	url: null,
 	frequency: 5000,
 	itemExtractor: function(response) {
-            return response.data || response;
+	    return response.data || response;
 	},
 	itemFilter: function(item) {
-            return true;
+	    return true;
 	},
 	idExtractor: function(item) {
-            return item.id;
+	    return item.id;
 	},
 	metadataExtractor: function(item) {
-            return {
+	    return {
 		lon: item.lon || item.longitude,
 		lat: item.lat || item.latitude
-            };
+	    };
 	},
 	lonExtractor: function(metadata) {
-            return metadata.lon;
+	    return metadata.lon;
 	},
 	latExtractor: function(metadata) {
-            return metadata.lat;
+	    return metadata.lat;
 	},
 	minPositions: 2,
 	maxHistorySize: 10,
 	style: {
-            color: '#3388ff',
-            weight: 3,
-            opacity: 0.7
+	    color: '#3388ff',
+	    weight: 3,
+	    opacity: 0.7
 	},
 	styleFunction: null,
 	onUpdate: null,
@@ -42,36 +42,36 @@ L.DataTracker = L.GeoJSON.extend({
 	L.setOptions(this, options);
 
 	if (!this.options.url) {
-            throw new Error('DataTracker requires a url option');
+	    throw new Error('DataTracker requires a url option');
 	}
 
 	this._history = {};
 	this._intervalId = null;
 
 	L.GeoJSON.prototype.initialize.call(this, null, {
-            style: (feature) => {
+	    style: (feature) => {
 		if (this.options.styleFunction) {
 		    return this.options.styleFunction(feature);
 		}
 		return this.options.style;
-            },
-            onEachFeature: this.options.onEachFeature
+	    },
+	    onEachFeature: this.options.onEachFeature
 	});
 
 	if (this.options.autoStart) {
-            this.start();
+	    this.start();
 	}
     },
 
     start: function () {
 	if (this._intervalId) {
-            return this;
+	    return this;
 	}
 
 	this._fetchAndUpdate();
 
 	this._intervalId = setInterval(() => {
-            this._fetchAndUpdate();
+	    this._fetchAndUpdate();
 	}, this.options.frequency);
 
 	return this;
@@ -79,8 +79,8 @@ L.DataTracker = L.GeoJSON.extend({
 
     stop: function () {
 	if (this._intervalId) {
-            clearInterval(this._intervalId);
-            this._intervalId = null;
+	    clearInterval(this._intervalId);
+	    this._intervalId = null;
 	}
 	return this;
     },
@@ -97,42 +97,42 @@ L.DataTracker = L.GeoJSON.extend({
 
     _fetchAndUpdate: function () {
 	fetch(this.options.url)
-            .then(response => {
+	    .then(response => {
 		if (!response.ok) {
 		    throw new Error(`HTTP error! status: ${response.status}`);
 		}
 		return response.json();
-            })
-            .then(data => {
+	    })
+	    .then(data => {
 		this._processData(data);
-            })
-            .catch(error => {
+	    })
+	    .catch(error => {
 		console.error('DataTracker fetch error:', error);
 		if (this.options.onError) {
 		    this.options.onError(error);
 		}
-            });
+	    });
     },
 
     _processData: function (data) {
 	const items = this.options.itemExtractor(data);
 
 	if (!Array.isArray(items)) {
-            console.error('itemExtractor must return an array');
-            return;
+	    console.error('itemExtractor must return an array');
+	    return;
 	}
 
 	const snapshot = {};
 	items.forEach(item => {
-            const id = this.options.idExtractor(item);
-            const metadata = this.options.metadataExtractor(item);
+	    const id = this.options.idExtractor(item);
+	    const metadata = this.options.metadataExtractor(item);
 
-            if (id !== null && id !== undefined && metadata) {
+	    if (id !== null && id !== undefined && metadata) {
 		if (!snapshot[id]) {
 		    snapshot[id] = [];
 		}
 		snapshot[id].push(metadata);
-            }
+	    }
 	});
 
 	this._mergeHistory(snapshot);
@@ -140,24 +140,24 @@ L.DataTracker = L.GeoJSON.extend({
 	this._updateGeoJSON();
 
 	if (this.options.onUpdate) {
-            this.options.onUpdate(this._history);
+	    this.options.onUpdate(this._history);
 	}
     },
 
     _mergeHistory: function (snapshot) {
 	Object.keys(snapshot).forEach(id => {
-            if (!this._history[id]) {
+	    if (!this._history[id]) {
 		this._history[id] = [];
-            }
+	    }
 
-            const combined = this._history[id].concat(snapshot[id]);
-            const deduplicated = this._deduplicatePositions(combined);
+	    const combined = this._history[id].concat(snapshot[id]);
+	    const deduplicated = this._deduplicatePositions(combined);
 
-            if (this.options.maxHistorySize && this.options.maxHistorySize > 0) {
+	    if (this.options.maxHistorySize && this.options.maxHistorySize > 0) {
 		this._history[id] = deduplicated.slice(-this.options.maxHistorySize);
-            } else {
+	    } else {
 		this._history[id] = deduplicated;
-            }
+	    }
 	});
     },
 
@@ -166,13 +166,13 @@ L.DataTracker = L.GeoJSON.extend({
 	const seen = new Set();
 
 	positions.forEach(pos => {
-            const lon = this.options.lonExtractor(pos);
-            const lat = this.options.latExtractor(pos);
-            const key = `${lon},${lat}`;
-            if (!seen.has(key)) {
+	    const lon = this.options.lonExtractor(pos);
+	    const lat = this.options.latExtractor(pos);
+	    const key = `${lon},${lat}`;
+	    if (!seen.has(key)) {
 		seen.add(key);
 		unique.push(pos);
-            }
+	    }
 	});
 
 	return unique;
@@ -182,10 +182,10 @@ L.DataTracker = L.GeoJSON.extend({
 	const moved = {};
 
 	Object.keys(this._history).forEach(id => {
-            const history = this._history[id];
-            if (history.length >= this.options.minPositions) {
+	    const history = this._history[id];
+	    if (history.length >= this.options.minPositions) {
 		moved[id] = history;
-            }
+	    }
 	});
 
 	return moved;
@@ -195,13 +195,13 @@ L.DataTracker = L.GeoJSON.extend({
 	const movedTracks = this._filterMovedTracks();
 
 	const features = Object.keys(movedTracks).map(id => {
-            const history = movedTracks[id];
-            const coordinates = history.map(pos => [
+	    const history = movedTracks[id];
+	    const coordinates = history.map(pos => [
 		this.options.lonExtractor(pos),
 		this.options.latExtractor(pos)
-            ]);
+	    ]);
 
-            return {
+	    return {
 		type: 'Feature',
 		properties: {
 		    id: id,
@@ -211,12 +211,12 @@ L.DataTracker = L.GeoJSON.extend({
 		    type: 'LineString',
 		    coordinates: coordinates
 		}
-            };
+	    };
 	});
 
 	return {
-            type: 'FeatureCollection',
-            features: features
+	    type: 'FeatureCollection',
+	    features: features
 	};
     },
 
@@ -231,7 +231,7 @@ L.DataTracker = L.GeoJSON.extend({
 	L.GeoJSON.prototype.onAdd.call(this, map);
 
 	if (this.options.autoStart && !this._intervalId) {
-            this.start();
+	    this.start();
 	}
 
 	return this;
