@@ -30,29 +30,13 @@ Usage Example for GBFS Bike API:
 ```javascript
 var map = L.map('map').setView([48.8566, 2.3522], 13);
 
-var tracker = L.dataTracker({
-    url: 'https://api.example.com/bikes/status.json',
-    frequency: 5000, 
-    itemExtractor: function(response) {
-        return response.data.bikes;
-    },
-    idExtractor: function(item) {
-        return item.bike_id;
-    },
-    metadataExtractor: function(item) {
-        return {
-            lon: item.lon,
-            lat: item.lat,
-            timestamp: item.last_updated
-        };
-    },
-    maxHistorySize: 20, // Keep last 20 positions
-    style: {
-        color: '#3388ff',
-        weight: 3,
-        opacity: 0.7
-    }
+const tracker = L.dataTracker({
+   url: 'https://data.lime.bike/api/partners/v2/gbfs/paris/free_bike_status',
+   itemExtractor: (response) => response.data.bikes,
+   idExtractor: (item) => item.bike_id,
+   metadataExtractor: (item) => ({ lon: item.lon, lat: item.lat })
 }).addTo(map);
+
 
 tracker.on('update', function() {
     console.log('Tracks updated');
