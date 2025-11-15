@@ -24,7 +24,7 @@ Usage Example for GBFS Bike API:
 ```javascript
 var map = L.map('map').setView([48.8566, 2.3522], 13);
 
-var tracker = L.liveTrackHistory({
+var tracker = L.dataTracker({
     url: 'https://api.example.com/bikes/status.json',
     frequency: 5000, 
     itemExtractor: function(response) {
@@ -63,7 +63,7 @@ The plugin extends `L.GeoJSON`, so you can use all standard Leaflet GeoJSON meth
 
 ### API
 
-#### L.LiveTrackHistory
+#### L.DataTracker
 
 A layer that tracks and visualizes movement history. Extends [L.GeoJSON](http://leafletjs.com/reference.html#geojson).
 
@@ -71,9 +71,9 @@ A layer that tracks and visualizes movement history. Extends [L.GeoJSON](http://
 
 Factory                | Description
 -----------------------|-------------------------------------------------------
-`L.liveTrackHistory(<`[`LiveTrackOptions`](#livetrackoptions)`> options)` | Instantiates a new live track history layer with the provided options
+`L.dataTracker(<`[`LiveTrackOptions`](#datatrackeroptions)`> options)` | Instantiates a new live track history layer with the provided options
 
-##### <a name="livetrackoptions"></a> Options
+##### <a name="datatrackeroptions"></a> Options
 
 Provides these options, in addition to the options of [`L.GeoJSON`](http://leafletjs.com/reference.html#geojson).
 
@@ -117,7 +117,7 @@ Custom events via `onUpdate` and `onError` callbacks | See options table | Use t
 ### Filtering Active Vehicles
 
 ```javascript
-var tracker = L.liveTrackHistory({
+var tracker = L.dataTracker({
     url: 'https://api.example.com/vehicles',
     frequency: 3000,
     itemExtractor: function(response) {
@@ -143,7 +143,7 @@ var tracker = L.liveTrackHistory({
 ### Dynamic Styling Based on Track Length
 
 ```javascript
-var tracker = L.liveTrackHistory({
+var tracker = L.dataTracker({
     url: 'https://api.example.com/data',
     itemExtractor: function(response) {
         return response.items;
@@ -173,7 +173,7 @@ var tracker = L.liveTrackHistory({
 ### Custom Coordinate Field Names
 
 ```javascript
-var tracker = L.liveTrackHistory({
+var tracker = L.dataTracker({
     url: 'https://api.example.com/sensors',
     itemExtractor: function(response) {
         return response.sensors;
@@ -201,7 +201,7 @@ var tracker = L.liveTrackHistory({
 ### Color Tracks by ID
 
 ```javascript
-var tracker = L.liveTrackHistory({
+var tracker = L.dataTracker({
     url: 'https://api.example.com/data',
     itemExtractor: function(response) {
         return response.items;
@@ -228,7 +228,7 @@ var tracker = L.liveTrackHistory({
 ### Manual Control
 
 ```javascript
-var tracker = L.liveTrackHistory({
+var tracker = L.dataTracker({
     url: 'https://api.example.com/data',
     autoStart: false, // Don't start automatically
     itemExtractor: function(response) {
