@@ -7,8 +7,8 @@
 Visualize Geospatial timeseries such as GPS tracking, [ADSB](https://en.wikipedia.org/wiki/Automatic_Dependent_Surveillance%E2%80%93Broadcast), [GBFS](https://gbfs.org/) API's or any API with dynamic object locations.
 
 See examples live here:
-- Lime Bike GBFS service in Paris
-- ADSB Tracker
+- [Lime Bike GBFS service in Paris](https://iomonad.github.io/leaflet-datatracker/examples/gbfs-tracker.html)
+- [ADS-B Tracker](https://iomonad.github.io/leaflet-datatracker/examples/adsb-tracker.html)
 
 ## Installation
 
