@@ -6,6 +6,10 @@
 
 Visualize Geospatial timeseries such as GPS tracking, [ADSB](https://en.wikipedia.org/wiki/Automatic_Dependent_Surveillance%E2%80%93Broadcast), [GBFS](https://gbfs.org/) API's or any API with dynamic object locations.
 
+See examples live here:
+- Lime Bike GBFS service in Paris
+- ADSB Tracker
+
 ## Installation
 
 ```bash
@@ -17,6 +21,7 @@ Or include via CDN:
 ```html
 <script src="https://unpkg.com/leaflet-datatracker@latest/dist/leaflet-datatracker.js"></script>
 ```
+
 
 ## Example
 
@@ -255,6 +260,15 @@ document.getElementById('stopBtn').addEventListener('click', function() {
 document.getElementById('clearBtn').addEventListener('click', function() {
     tracker.clearHistory();
 });
+```
+
+## Release
+
+Release is created as follow:
+
+```shell
+$ npx grunt
+$ npm publish --access public
 ```
 
 ## License
